@@ -11,10 +11,10 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 import os
-
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+# Путь к корневой директории проекта
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -22,45 +22,52 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
+# Ключ безопасности (должен быть скрыт в продакшене)
 SECRET_KEY = 'django-insecure-tc@235w=y)5-d7@o#5+d1z-d9h6li+eiyy!4u-&9b7o(yff6em'
 
 # SECURITY WARNING: don't run with debug turned on in production!
+# Режим отладки (False в продакшене)
 DEBUG = True
 
+# Список допустимых хостов
 ALLOWED_HOSTS = []
 
 
 # Application definition
 
+# Список приложений, подключенных к проекту
 INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
+    'django.contrib.admin',         # Административная панель Django
+    'django.contrib.auth',          # Система аутентификации
+    'django.contrib.contenttypes',  # Поддержка типов контента
+    'django.contrib.sessions',      # Поддержка сессий
+    'django.contrib.messages',      # Система сообщений
+    'django.contrib.staticfiles',   # Поддержка статических файлов
     'shop'
 ]
 
+# Промежуточное ПО (middleware) для обработки запросов и ответов
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.security.SecurityMiddleware',         # Настройки безопасности
+    'django.contrib.sessions.middleware.SessionMiddleware',  # Поддержка сессий
+    'django.middleware.common.CommonMiddleware',             # Общие настройки
+    'django.middleware.csrf.CsrfViewMiddleware',             # Защита от CSRF
+    'django.contrib.auth.middleware.AuthenticationMiddleware', # Аутентификация
+    'django.contrib.messages.middleware.MessageMiddleware',  # Поддержка сообщений
+    'django.middleware.clickjacking.XFrameOptionsMiddleware', # Защита от clickjacking
 ]
 
+# Основной файл маршрутизации URL
 ROOT_URLCONF = 'sushi_delivery_shop.urls'
 
+# Настройки шаблонов
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': True,
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',  # Шаблонизатор Django
+        'DIRS': [],                # Папки с пользовательскими шаблонами
+        'APP_DIRS': True,          # Поиск шаблонов в приложениях
         'OPTIONS': {
-            'context_processors': [
+            'context_processors': [  # Процессоры контекста для передачи данных в шаблоны
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
@@ -70,16 +77,18 @@ TEMPLATES = [
     },
 ]
 
+# Настройка WSGI для продакшена
 WSGI_APPLICATION = 'sushi_delivery_shop.wsgi.application'
 
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+# Настройки базы данных (SQLite по умолчанию)
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.sqlite3',   # Движок базы данных SQLite
+        'NAME': BASE_DIR / 'db.sqlite3',          # Путь к файлу базы данных
     }
 }
 
@@ -87,18 +96,19 @@ DATABASES = {
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 
+# Валидация паролей
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator', # Проверка сходства с данными пользователя
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator', # Минимальная длина пароля
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator', # Защита от распространённых паролей
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator', # Проверка на отсутствие чисто числовых паролей
     },
 ]
 
@@ -106,12 +116,12 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
-LANGUAGE_CODE = 'ru'
+# Настройки языка и часового пояса
+LANGUAGE_CODE = 'ru'  # Язык по умолчанию
+TIME_ZONE = 'UTC'     # Часовой пояс
 
-TIME_ZONE = 'UTC'
-
+# Включить локализацию и поддержку часовых поясов
 USE_I18N = True
-
 USE_TZ = True
 
 
@@ -123,11 +133,10 @@ USE_TZ = True
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-STATIC_URL = '/static/'
+# Настройки для статических файлов
+STATIC_URL = '/static/'                         # URL для статических файлов
+STATICFILES_DIRS = (BASE_DIR / 'static', )      # Директория для пользовательских статических файлов
+STATIC_ROOT = BASE_DIR / '../static'            # Путь для сбора статических файлов в продакшене
 
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)
-
-STATIC_ROOT = os.path.join(BASE_DIR, '../static')
-MEDIA_ROOT = os.path.join(BASE_DIR, '../media')
+# Настройки для медиа-файлов
+MEDIA_ROOT = BASE_DIR / '../media'              # Путь для загрузки медиа-файлов
