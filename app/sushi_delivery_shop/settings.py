@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',      # Поддержка сессий
     'django.contrib.messages',      # Система сообщений
     'django.contrib.staticfiles',   # Поддержка статических файлов
-    'shop'
+    'shop',
+    'cart',
 ]
 
 # Промежуточное ПО (middleware) для обработки запросов и ответов

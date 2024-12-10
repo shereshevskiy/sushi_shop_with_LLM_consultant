@@ -1,11 +1,25 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}СушиShop{% endblock %}</title>
+    <title>СушиShop</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+    <link href="/static/css/roboto.css" rel="stylesheet">    
+
+    {% block head %}{% endblock head %}
+
 </head>
 <body>
+    <nav class="navbar">
+        <a class="header__logo" href="{% url 'index' %}">СушиShop</a>
+        <a href="/cart/" class="button cart-button">Корзина 🛒</a>
+    </nav>
+
+    {% block breadcrumbs %}{% endblock breadcrumbs %}
+
     {% block content %}{% endblock content %}
 </body>
 </html>

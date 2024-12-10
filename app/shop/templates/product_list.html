@@ -1,43 +1,67 @@
 {% extends  'base.html' %}
 
-{% block content %}
-    <!-- Форма для сортировки по имени -->
-    <form method="get" style="display: inline-block; margin-right: 10px;">
-        <label for="sort_name">Сортировать по имени:</label>
-        <select name="sort_name" id="sort_name">
-            <option value="" {% if request.GET.sort_name == "" or request.GET.sort_name is None %}selected{% endif %}>Не сортировать</option>
-            <option value="asc_name" {% if request.GET.sort_name == "asc_name" %}selected{% endif %}>По возрастанию</option>
-            <option value="desc_name" {% if request.GET.sort_name == "desc_name" %}selected{% endif %}>По убыванию</option>
-        </select>
-        <button type="submit">Применить</button>
-    </form>
+{% block breadcrumbs %}
+    <div class="content__container">
+        <div class="breadcrumbs">
+            <a href="/">Главная</a>
+            <span>/</span>
+            <span>Меню</span>
 
-    <!-- Форма для сортировки по цене -->
-    <form method="get" style="display: inline-block;">
-        <label for="sort_price">Сортировать по цене:</label>
-        <select name="sort_price" id="sort_price">
-            <option value="" {% if request.GET.sort_price == "" or request.GET.sort_price is None %}selected{% endif %}>Не сортировать</option>
-            <option value="asc_price" {% if request.GET.sort_price == "asc_price" %}selected{% endif %}>По возрастанию</option>
-            <option value="desc_price" {% if request.GET.sort_price == "desc_price" %}selected{% endif %}>По убыванию</option>
-        </select>
-        <button type="submit">Применить</button>
-    </form>
-
-    <div>
-        {% for product in products %}
-        <div>
-            <a href="{% url 'product_detail' pk=product.pk %}">
-                <h2>{{ product.name }}</h2>
-            </a>
-            
-            <div>
-                {% if product.image %}
-                    <img src="{{product.image.url}}">
-                {% endif %}
+            <div class="sorting-container">
+                <!-- Формы для сортировки -->
+                <div>
+                    <!-- Форма для сортировки по имени -->
+                    <form method="get" class="sort">
+                        <label for="sort_name">Сортировать по имени:</label>
+                        <select name="sort_name" id="sort_name">
+                            <option value="" {% if request.GET.sort_name == "" or request.GET.sort_name is None %}selected{% endif %}>Не сортировать</option>
+                            <option value="asc_name" {% if request.GET.sort_name == "asc_name" %}selected{% endif %}>По возрастанию</option>
+                            <option value="desc_name" {% if request.GET.sort_name == "desc_name" %}selected{% endif %}>По убыванию</option>
+                        </select>
+                        <button type="submit">Применить</button>
+                    </form>
+                </div>
+                <div>
+                    <!-- Форма для сортировки по цене -->
+                    <form method="get" class="sort">
+                        <label for="sort_price">Сортировать по цене:</label>
+                        <select name="sort_price" id="sort_price">
+                            <option value="" {% if request.GET.sort_price == "" or request.GET.sort_price is None %}selected{% endif %}>Не сортировать</option>
+                            <option value="asc_price" {% if request.GET.sort_price == "asc_price" %}selected{% endif %}>По возрастанию</option>
+                            <option value="desc_price" {% if request.GET.sort_price == "desc_price" %}selected{% endif %}>По убыванию</option>
+                        </select>
+                        <button type="submit">Применить</button>
+                    </form>
+                </div>
             </div>
-
-            <div>Цена: {{ product.price|floatformat:0 }} ₽</div>
         </div>
-        {% endfor %}
+    </div>
+{% endblock breadcrumbs %}
+
+{% block content %}
+    
+
+    <div class="content__container">
+        <div class="catalog__container">
+            {% for product in products %}
+
+                <div class="catalog__item">
+                    <a class="catalog__item__header" href="{% url 'product_detail' pk=product.pk %}">
+                        <h2>{{ product.name }}</h2>
+                    </a>
+                    
+                    <a class="catalog__item__photo__container" href="{% url 'product_detail' pk=product.pk %}">
+                        {% if product.image %}
+                            <img class="catalog__item__photo" src="{{product.image.url}}">
+                        {% endif %}
+                    </a>
+
+                    <div class="catalog__item__price">Цена: {{ product.price|floatformat:0 }} ₽</div>
+                
+                    {% include 'includes/buy_button.html' %}
+                </div>
+
+            {% endfor %}
+        </div>
     </div>
 {% endblock content %}

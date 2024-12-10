@@ -1,14 +1,33 @@
-{% extends  'base.html' %}
+{% extends 'base.html' %}
+
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="/static/css/detail.css">
+{% endblock head %}
+
+{% block breadcrumbs %}
+    <div class="content__container">
+        <div class="breadcrumbs">
+            <a href="/">Главная</a>
+            <span>/</span>
+            <a href="{% url 'product_list' %}">Меню</a>
+            <span>/</span>
+            <span>{{ product.name }}</span>
+        </div>
+    </div>
+{% endblock breadcrumbs %}
 
 {% block content %}
-    <div>
-        <div>
-            {% if product.image %}
-                <img src="{{ product.image.url }}" alt="{{ product.name }}">
-            {% endif %}
-        </div>
-        <h2>{{ product.name }}</h2>
-        <div>{{ product.description }}</div>
-        <div>Цена: {{ product.price|floatformat:0 }} ₽</div>
+
+<div class="product-detail">
+    {% if product.image %}
+        <img src="{{ product.image.url }}" alt="{{ product.name }}">
+    {% endif %}
+    <div class="product-detail__info">
+        <h2 class="product-detail__name">{{ product.name }}</h2>
+        <div class="product-detail__description">{{ product.description|linebreaksbr }}</div>
+        <div class="product-detail__price">Цена: {{ product.price|floatformat:0 }} ₽</div>
+        {% include 'includes/buy_button.html' %}
     </div>
+    
+</div>
 {% endblock content %}
