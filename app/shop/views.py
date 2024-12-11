@@ -13,7 +13,7 @@ def index(request):
     context = {
         'title': 'Доставка суши SusiShop',  # Заголовок страницы
         'products_on_sale': Product.objects.filter(on_sale=True),
-        'products_on_popular': Product.objects.filter(on_popular=True)
+        'products_on_popular': Product.objects.filter(on_popular=True).order_by('-price')
     }
     # Возврат сгенерированной HTML-страницы с переданными данными
     return render(request, 'index.html', context)
