@@ -24,3 +24,10 @@ class Command(BaseCommand):
                 for chunk in chunks:
                     file.write(f'## {category.name}\n')
                     file.write(f'{chunk.text}\n')
+                    
+            # экспорт товаров по акции
+            for product in products.filter(on_sale=True):
+                file.write(f'## Позиция товара по акции – {product.name}\n')
+                file.write(f'Описание товара по акции: {product.description.replace('\r','')}\n')
+                file.write(f'Цена товара по акции: {int(product.price)} рублей\n')
+                file.write(f'Ссылка на товар товара по акции: [{product.name}](http://127.0.0.1:8000{product.get_absolute_url()})\n\n')
