@@ -230,7 +230,7 @@ class Product(models.Model):
    корневой каталог webapp каталог с WEB-сервисом FastAPI.
 2. Экспортируем из базы данных sqlite3 базу знаний с помощью команды, которую напишем в Django в файле app\neuro_assistant\management\commands\chunks_export.py
 
-```
+```python
 from django.core.management.base import BaseCommand
 from neuro_assistant.models import Category, Chunk
 from shop.models import Product
