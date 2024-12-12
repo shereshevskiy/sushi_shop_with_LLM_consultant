@@ -73,20 +73,15 @@ class Chunk():
 
         messages = []
         messages.append({"role": "system", "content": system})
-        for m in last_messages:
-            messages.append(m)
+        if last_messages:
+            for m in last_messages:
+                messages.append(m)
         user = '''
             Ответь на вопрос клиента только на основе документа с информацией.
             Не упоминай документ с информацией для ответа клиенту в ответе.
         '''
         user += f"Документ с информацией для ответа клиенту: ```{message_content}```\nВопрос клиента: \n{query}"
         messages.append({"role": "user", "content": user})
-
-        completion = client.chat.completions.create(
-            model="gpt-3.5-turbo",
-            messages=messages,
-            temperature=0
-        )
 
         completion = client.chat.completions.create(
             model="gpt-4o-mini",
