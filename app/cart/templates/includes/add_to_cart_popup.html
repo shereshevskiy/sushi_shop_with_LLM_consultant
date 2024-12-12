@@ -1,0 +1,82 @@
+<style>
+    .cart-link {
+        position: relative;
+    }
+    .cart-link__icon {
+        margin-left: 100px;
+        margin-bottom: -5px;
+    }
+    #cart-link__popup {
+        color: #fff;
+        position: fixed;
+        top: 10px;
+        left: 50%;
+        background-color: #1a7df7;
+        padding: 15px 20px;
+        border-radius: 20px;
+        opacity: 0;
+        transition: opacity 0.5s;
+        z-index: 999;
+        pointer-events: none;
+        width: 200px;
+        transform: translateX(-50%);
+    }
+    .show {
+        opacity: 1 !important;
+    }
+</style>
+
+<div id="cart-link__popup">
+    Товар добавлен в корзину
+</div>
+
+<script>
+    function getCSRFToken() {
+        const cookieValue = document.cookie
+            .split('; ')
+            .find(row => row.startsWith('csrftoken='))
+            .split('=')[1];
+
+        return cookieValue;
+    }
+    function addToCart(productID, productName) {
+        const url = `/add_to_cart/${productID}/1/`; // URL для добавления товара в корзину
+
+        const formData = new FormData();
+        formData.append('product_id', productID);
+        const csrftoken = getCSRFToken();
+
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrftoken  // Передача токена CSRF
+            },
+
+            body: formData
+        })
+        .then(response => {
+            if (response.ok) {
+                // Произошло успешное добавление в корзину
+                // Можно показать сообщение или обновить UI
+                console.log('Товар успешно добавлен в корзину');
+            } else {
+                console.error('Ошибка при добавлении товара в корзину');
+            }
+        })
+        .catch(error => {
+            console.error('Произошла ошибка:', error);
+        });
+
+        const cartMessage = document.getElementById('cart-link__popup');
+        cartMessage.textContent = `${productName} добавлен в корзину`;
+        
+        cartMessage.classList.add('show');
+
+        setTimeout(() => {
+            cartMessage.classList.remove('show');
+        }, 2000);
+    }
+
+
+</script>
