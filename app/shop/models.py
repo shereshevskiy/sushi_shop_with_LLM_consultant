@@ -1,4 +1,6 @@
 from django.db import models
+from django.urls import reverse
+
 
 # Create your models here.
 class Product(models.Model):
@@ -10,4 +12,12 @@ class Product(models.Model):
     on_popular = models.BooleanField(default=False)  # Новое поле "популярная продукция"
 
     def __str__(self) -> str:
+        """Returns the string representation of the Product instance, which is the product's name."""
         return self.name
+    
+    def get_absolute_url(self):
+        """Returns the URL to access a particular product instance.
+        
+        :return: URL to access the product instance
+        """
+        return reverse('product_detail', args=[str(self.pk)])
