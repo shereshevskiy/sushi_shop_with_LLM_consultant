@@ -13,7 +13,7 @@
 
 </head>
 <body>
-    <div class="content__container">
+    <div class="navbar__container">
         <nav class="navbar">
             <a class="header__logo" href="{% url 'index' %}">🥢 СушиShop</a>
             <div class="cart-container">
@@ -28,5 +28,7 @@
     {% block breadcrumbs %}{% endblock breadcrumbs %}
 
     {% block content %}{% endblock content %}
+    <!-- Подключение JavaScript -->
+    <script src="{% static 'js/ajax_cart.js' %}"></script>
 </body>
 </html>

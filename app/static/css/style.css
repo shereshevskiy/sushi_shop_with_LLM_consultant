@@ -252,3 +252,20 @@ body {
     width: 30px; /* Размер иконки */
     height: 30px;
 }
+
+/* Стили для контейнера навигации */
+.navbar__container {
+    /* Общие стили */
+    max-width: 800px; /* Как в content__container */
+    margin: auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+
+    /* Уникальные стили */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    height: 60px;
+}

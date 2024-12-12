@@ -58,7 +58,7 @@
 
                     <div class="catalog__item__price">Цена: {{ product.price|floatformat:0 }} ₽</div>
                 
-                    {% include 'includes/buy_button.html' %}
+                    {% include 'includes/ajax_buy_button.html' %}
                 </div>
 
             {% endfor %}

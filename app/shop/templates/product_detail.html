@@ -26,7 +26,7 @@
         <h2 class="product-detail__name">{{ product.name }}</h2>
         <div class="product-detail__description">{{ product.description|linebreaksbr }}</div>
         <div class="product-detail__price">Цена: {{ product.price|floatformat:0 }} ₽</div>
-        {% include 'includes/buy_button.html' %}
+        {% include 'includes/ajax_buy_button.html' %}
     </div>
     
 </div>
