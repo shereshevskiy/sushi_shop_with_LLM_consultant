@@ -1,0 +1,158 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Диалог с консультантом</title>
+        <link
+            rel="stylesheet"
+            href="{% static '/neuro_assistant/css/styles.css' %}"
+        />
+        <script src="//unpkg.com/alpinejs" defer></script>
+        <script src="https://unpkg.com/marked@0.3.6"></script>
+    </head>
+    <body>
+        {% include 'includes/add_to_cart_popup.html' %}
+        <div class="chat-container" x-data="chat">
+            <div class="chat-box">
+                <div class="chat-messages">
+                    <template x-for="msg in messages" :key="msg.id">
+                        <div
+                            x-markdown="msg.text"
+                            :class="msg.role == 'assistant' ? 'chat-message assistant' : 'chat-message user'"
+                        ></div>
+                    </template>
+                    <div
+                        x-show="isConsultantTyping"
+                        class="chat-message assistant"
+                    >
+                        Консультант пишет...
+                    </div>
+                </div>
+
+                <div class="cart-message" id="added_to_cart_message">Товар добавлен в корзину</div>
+
+            </div>
+            
+            <div class="input-container">
+                <input
+                    type="text"
+                    class="chat-input"
+                    placeholder="Введите ваше сообщение..."
+                    x-model="newMessageText"
+                    @keydown.enter="sendMessage"
+                />
+                <div @click="sendMessage" class="send-button">
+                    <img
+                        src="{% static '/neuro_assistant/icons/send.svg' %}"
+                        width="30"
+                        height="30"
+                        alt="image format png"
+                    />
+                </div>
+            </div>
+        </div>
+        <script>
+
+            var renderer = new marked.Renderer();
+            renderer.link = function (href, title, text) {
+                // преобразуем полученные от консультанта ссылки из markdown в html
+                var link = marked.Renderer.prototype.link.call(
+                    this,
+                    href,
+                    title,
+                    text
+                );
+                // получааем id товара из ссылки http://127.0.0.1:8000/products/9/
+                productID = link.match(/\/products\/(\d+)/)[1];
+                // добавляем кнопку добавления в корзину и атрибут target для открытия ссылки на товар в новом окне
+                return link.replace("<a", `<a class='add-to-cart' onclick='addToCart(${productID}, "${text}")'>🛒  </a><a target='_blank' `);
+            };
+
+            marked.setOptions({
+                renderer: renderer,
+            });
+            document.addEventListener("alpine:initializing", () => {
+                Alpine.directive(
+                    "markdown",
+                    (el, { expression }, { effect, evaluateLater }) => {
+                        let getHTML = evaluateLater(expression);
+
+                        effect(() => {
+                            getHTML((input) => {
+                                el.innerHTML = marked(input, {
+                                    sanitize: true,
+                                });
+                            });
+                        });
+                    }
+                );
+            });
+            
+            document.addEventListener("alpine:init", () => {
+                Alpine.data("chat", () => ({
+                    messages: [],
+                    newMessageText: "",
+                    isConsultantTyping: false,
+                    url: "http://127.0.0.1:5000/api/get_answer",
+                    init(){
+                        const savedMessages = localStorage.getItem('chatMessages');
+                        if (savedMessages) {
+                            this.messages = JSON.parse(savedMessages);
+                        }
+                    },
+                    sendMessage() {
+                        // Очистка истории сообщений
+                        if (this.newMessageText == '/reset') {
+                            this.newMessageText = '';
+                            this.messages = [];
+                            localStorage.removeItem('chatMessages');
+                            return
+                        }
+                        
+                        // добавляем в историю сообщение от пользователя и отправляем его консультанту
+                        let payload = {
+                            text: this.newMessageText,
+                            messages: this.messages.map(message => ({
+                                content: message.text,
+                                role: message.role
+                            }))                            
+                        };
+                        this.messages.push({
+                            text: this.newMessageText,
+                            role: "user",
+                            id: Date.now(),
+                        });
+                        
+                        this.isConsultantTyping = true;
+
+                        // отправляем сообщение консультанту
+                        fetch(this.url, {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify(payload),
+                            mode: "cors", 
+                        })
+                            .then((response) => response.json())
+                            .then((data) => {
+                                console.log(data);
+                                this.messages.push({
+                                    text: data.answer,
+                                    role: "assistant",
+                                    id: Date.now(),
+                                });
+                                this.isConsultantTyping = false;
+                                // сохраняем сообщения в localStorage
+                                localStorage.setItem('chatMessages', JSON.stringify(this.messages));
+                            });
+                        this.newMessageText = "";
+                    },
+
+                }));
+            });
+        </script>
+    </body>
+</html>

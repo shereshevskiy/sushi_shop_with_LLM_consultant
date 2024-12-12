@@ -1,0 +1,106 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+p {
+  margin: 0;
+}
+
+.chat-container {
+  max-width: 600px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-box {
+  flex: 1;
+  overflow-y: auto; /* Добавляем прокрутку */
+  display: flex;
+  padding: 10px;
+  flex-direction: column-reverse; /* Сообщения внизу */
+  position: relative;
+}
+
+.chat-messages {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end; /* Сообщения внизу */
+}
+
+.chat-message {
+  padding: 10px;
+  margin: 5px;
+  border-radius: 5px;
+  max-width: 80%; /* Ограничиваем ширину сообщений */
+}
+
+.assistant {
+  background-color: #f1f1f1;
+  align-self: flex-start; /* Меняем выравнивание для консультанта */
+}
+
+.user {
+  background-color: #006ffc24;
+  align-self: flex-end; /* Меняем выравнивание для пользователя */
+}
+
+.input-container {
+  display: flex;
+  align-items: center;
+  padding: 10px 17px;
+}
+
+.chat-input {
+  border: 1px solid #888888;
+  border-radius: 7px;
+  font-size: 15px;
+  outline: none;
+}
+
+input {
+  flex: 1;
+  padding: 10px;
+}
+
+.send-button {
+  padding: 10px;
+  margin-left: 10px;
+  background-color: #ffffff;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.add-to-cart {
+  cursor: pointer;
+}
+
+.cart-message {
+  color: #fff;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #1a7df7;
+  padding: 15px 20px;
+  border-radius: 20px;
+  opacity: 0;
+  transition: opacity 0.5s;
+  z-index: 999;
+  pointer-events: none;
+}
+.show {
+  opacity: 1;
+}
+

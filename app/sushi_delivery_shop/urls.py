@@ -23,6 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('cart.urls')),
     path('', include('shop.urls')),
+    path('neuro_assistant/', include('neuro_assistant.urls')),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

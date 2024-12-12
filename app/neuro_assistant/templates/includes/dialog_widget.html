@@ -1,0 +1,92 @@
+{% load static %}
+<style>
+    .floating-button {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: #ff9800;
+        color: #fff;
+        padding: 15px 20px;
+        border-radius: 30px; /* Радиус делает кнопку овальной */
+        cursor: pointer;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        font-size: 16px; /* Убедитесь, что текст хорошо вписывается */
+        text-align: center; /* Центрирует текст внутри кнопки */
+    }
+    .close-button {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #ffffff;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+    }
+
+    .dialog-box {
+        display: none;
+        position: fixed;
+        bottom: 70px;
+        right: 20px;
+
+        max-width: 90%;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 13px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        animation: fadeIn 0.5s;
+
+        width: 375px;
+        height: 500px;
+        max-height: calc(100% - 105px);
+        max-width: calc(100% - 20px);
+        overflow: hidden;
+    }
+    .dialog-box > iframe {
+        border: none;
+        height: 100%;
+        width: 100%;
+    }
+    
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @media (max-width: 768px) {
+        .dialog-box {
+            width: 90%;
+            height: 80%;
+        }
+    }
+</style>
+
+
+<div class="floating-button" onclick="toggleDialog()">
+    Консультант
+</div>
+
+<div class="dialog-box" id="dialogBox">
+    <div class="close-button" onclick="toggleDialog()">
+        <img src="{% static '/neuro_assistant/icons/icon-close.svg' %}" width="20" height="20" alt="image format png" />       
+    </div>
+    <iframe id="innoprompt_chat_iframe" src='/neuro_assistant/dialog/'></iframe>
+</div>
+
+<script>
+    function toggleDialog() {
+        var dialogBox = document.getElementById('dialogBox');
+        dialogBox.style.display = (dialogBox.style.display === 'block') ? 'none' : 'block';
+    }
+</script>

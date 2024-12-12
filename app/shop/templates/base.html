@@ -28,6 +28,10 @@
     {% block breadcrumbs %}{% endblock breadcrumbs %}
 
     {% block content %}{% endblock content %}
+
+    <!-- Подключение консультанта -->
+    {% include 'includes/dialog_widget.html' %}
+
     <!-- Подключение JavaScript -->
     <script src="{% static 'js/ajax_cart.js' %}"></script>
 </body>
