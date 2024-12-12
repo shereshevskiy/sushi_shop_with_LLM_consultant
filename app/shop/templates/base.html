@@ -13,10 +13,17 @@
 
 </head>
 <body>
-    <nav class="navbar">
-        <a class="header__logo" href="{% url 'index' %}">СушиShop</a>
-        <a href="/cart/" class="button cart-button">Корзина 🛒</a>
-    </nav>
+    <div class="content__container">
+        <nav class="navbar">
+            <a class="header__logo" href="{% url 'index' %}">🥢 СушиShop</a>
+            <div class="cart-container">
+                <a class="cart-link" href="{% url 'cart' %}">
+                    <img class="cart-link__icon" src="/static/icons/cart.svg" width="30" height="30" alt="Корзина">
+                </a>
+                {% include 'includes/add_to_cart_popup.html' %}
+            </div>
+        </nav>
+    </div>
 
     {% block breadcrumbs %}{% endblock breadcrumbs %}
 

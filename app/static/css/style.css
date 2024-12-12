@@ -1,3 +1,7 @@
+html {
+    overflow-y: scroll; /* Всегда показывать вертикальный скроллбар */
+}
+
 body {
     font-family: 'Roboto', sans-serif;
     color: rgb(44, 14, 3);
@@ -20,20 +24,27 @@ body {
     transform: translateY(-3px);
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
 }
+/* Навбар с логотипом и корзиной */
 .navbar {
-    height: 60px;
-    text-align: center;
+    display: flex; /* Используем flexbox для выравнивания элементов */
+    justify-content: center; /* Центрирует логотип по горизонтали */
+    align-items: center; /* Центрирует элементы по вертикали */
+    position: relative; /* Для абсолютного позиционирования корзины */
+    height: 60px; /* Высота шапки */
+    background-color: #fff;
     margin-bottom: 20px;
 }
+
+/* Логотип */
 .header__logo {
-    color: inherit;
-    text-decoration: inherit;
-    
-    padding-left: 50px;
     font-weight: 700;
     font-size: 34px;
+    text-align: center; /* Центрирование текста */
+    color: inherit;
+    text-decoration: inherit;
     margin-bottom: 30px;
 }
+
 .breadcrumbs {
     display: flex;
     align-items: center;
@@ -63,11 +74,11 @@ body {
     display: flex;
     justify-content: center;
 }
+/* Контейнер для всего содержимого */
 .content__container {
-    max-width: 800px;
-    margin: auto;
-    padding-left: 50px;
-    padding-right: 50px;
+    max-width: 800px; /* Ограничивает ширину контейнера */
+    margin: auto; /* Центрирует контейнер по горизонтали */
+    padding: 0 20px; /* Добавляет отступы по бокам */
 }
 
 
@@ -216,20 +227,28 @@ body {
     background-color: #e67e00; /* Цвет при наведении */
 }
 
-.navbar {
-    display: flex;
-    justify-content: center; /* Центрирует содержимое горизонтально */
-    align-items: center; /* Центрирует содержимое вертикально */
-    padding: 0 20px;
-    height: 60px;
-    background-color: #fff;
-    margin-bottom: 20px;
-    position: relative; /* Позволяет добавить дополнительные элементы с абсолютным позиционированием */
-}
-
 .cart-button {
     position: absolute; /* Абсолютное позиционирование */
     right: 20px; /* Отступ от правого края */
     top: 50%; /* Центрирование по вертикали */
     transform: translateY(-50%); /* Коррекция вертикального положения */
+}
+
+/* Корзина */
+.cart-container {
+    position: absolute; /* Абсолютное позиционирование внутри navbar */
+    right: 20px; /* Прижимаем корзину к правому краю контейнера */
+    top: 50%; /* Центрируем по вертикали */
+    transform: translateY(-50%); /* Корректируем вертикальное положение */
+    display: flex; /* Если есть другие элементы рядом с корзиной */
+    align-items: center;
+}
+
+.cart-link {
+    text-decoration: none;
+}
+
+.cart-link__icon {
+    width: 30px; /* Размер иконки */
+    height: 30px;
 }
