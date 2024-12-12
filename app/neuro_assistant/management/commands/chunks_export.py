@@ -2,6 +2,7 @@ from django.core.management.base import BaseCommand
 from neuro_assistant.models import Category, Chunk
 from shop.models import Product
 
+
 class Command(BaseCommand):
     help = 'Export all chunks to a text file'
 

@@ -286,5 +286,5 @@ pip install -r requirements.txt
 6. Запускаем FastAPI:
 
 ```
-uvicorn main:app --reload --host 5000
+uvicorn main:app --reload --port 5000
 ```
