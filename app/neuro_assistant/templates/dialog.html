@@ -64,7 +64,7 @@
                     title,
                     text
                 );
-                // получааем id товара из ссылки http://127.0.0.1:8000/products/9/
+                // получааем id товара из ссылки http://BASE_URL/products/9/
                 productID = link.match(/\/products\/(\d+)/)[1];
                 // добавляем кнопку добавления в корзину и атрибут target для открытия ссылки на товар в новом окне
                 return link.replace("<a", `<a class='add-to-cart' onclick='addToCart(${productID}, "${text}")'>🛒  </a><a target='_blank' `);
@@ -95,7 +95,8 @@
                     messages: [],
                     newMessageText: "",
                     isConsultantTyping: false,
-                    url: "http://127.0.0.1:5000/api/get_answer",
+                    // Здесь подставляется значение из контекста
+                    url: "{{ consultant_api_url }}",
                     init(){
                         const savedMessages = localStorage.getItem('chatMessages');
                         if (savedMessages) {

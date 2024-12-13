@@ -228,28 +228,32 @@ class Product(models.Model):
 
 1. Скопируйте из материалов урока в
    корневой каталог webapp каталог с WEB-сервисом FastAPI.
-2. Экспортируем из базы данных sqlite3 базу знаний с помощью команды, которую напишем в Django в файле app\neuro_assistant\management\commands\chunks_export.py
+2. Прописываем `CONSULTANT_API_URL="http://127.0.0.1:5000/api/get_answer"` в `app/sushi_delivery_shop/settings.py` . Если мы делаем это не локально, то вместо `127.0.0.1` прописываем ip удаленного сервера.
+3. Экспортируем из базы данных sqlite3 базу знаний с помощью команды, которую напишем в Django в файле app\neuro_assistant\management\commands\chunks_export.py
 
 ```python
+from django.conf import settings
 from django.core.management.base import BaseCommand
 from neuro_assistant.models import Category, Chunk
 from shop.models import Product
+
 
 class Command(BaseCommand):
     help = 'Export all chunks to a text file'
 
     def handle(self, *args, **options):
         relative_path = '../api/chunks.md'
-        with open(relative_path, 'w') as file:
+        with open(relative_path, 'w', encoding='utf-8') as file:
             products = Product.objects.all()
 
+            # экспорт товаров
             for product in products:
                 file.write(f'## Позиция каталога – {product.name}\n')
                 file.write(f'Описание: {product.description.replace('\r','')}\n')
                 file.write(f'Цена: {int(product.price)} рублей\n')
- 
-                file.write(f'Ссылка на товар: [{product.name}](http://127.0.0.1:8000{product.get_absolute_url()})\n\n')
+                file.write(f'Ссылка на товар: [{product.name}](http://{settings.BASE_URL}{product.get_absolute_url()})\n\n')
 
+            # экспорт категорий
             for category in Category.objects.all():
                 chunks = Chunk.objects.filter(category=category)
                 for chunk in chunks:

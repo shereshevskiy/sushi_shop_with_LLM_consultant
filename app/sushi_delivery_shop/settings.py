@@ -145,3 +145,7 @@ MEDIA_ROOT = BASE_DIR / '../media'              # Путь для загрузк
 
 # Разрешаем окно в окне
 X_FRAME_OPTIONS = 'SAMEORIGIN'
+
+# Прописываем ссылки
+BASE_URL = "http://127.0.0.1:8000"
+CONSULTANT_API_URL = "http://127.0.0.1:5000/api/get_answer"
