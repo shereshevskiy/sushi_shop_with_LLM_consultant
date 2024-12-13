@@ -26,6 +26,10 @@ body {
 }
 /* Навбар с логотипом и корзиной */
 .navbar {
+    max-width: 800px;
+    margin: auto;
+    padding: 0 20px;
+    box-sizing: border-box;
     display: flex; /* Используем flexbox для выравнивания элементов */
     justify-content: center; /* Центрирует логотип по горизонтали */
     align-items: center; /* Центрирует элементы по вертикали */
@@ -256,7 +260,7 @@ body {
 /* Стили для контейнера навигации */
 .navbar__container {
     /* Общие стили */
-    max-width: 800px; /* Как в content__container */
+    /* max-width: 800px; Как в content__container */
     margin: auto;
     padding: 0 20px;
     box-sizing: border-box;
