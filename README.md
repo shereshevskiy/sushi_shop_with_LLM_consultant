@@ -4,20 +4,20 @@ SushiShop is an innovative web application designed for a seamless sushi deliver
 
 ## Key Features
 
-    1.	AI Neuro-Consultant:
-	*	Uses state-of-the-art LLMs for personalized customer support and recommendations.
-	*	Can answer customer queries, suggest menu items, and assist with navigating the store.
-	2.	Dynamic Sushi Menu:
-	*	A regularly updated menu featuring seasonal novelties.
-	*	Includes detailed descriptions and high-quality images for every dish.
-	3.	User-Friendly Design:
-	*	Responsive interface for smooth interaction on both desktop and mobile.
-	*	Intuitive navigation for exploring the menu, viewing promotions, and completing orders.
-	4.	Efficient Order Processing:
-	*	Streamlined checkout experience.
-	*	Integration with payment gateways for secure transactions.
-	5.	Custom Knowledge Base:
-	*	A proprietary knowledge base is used by the neuro-consultant to provide context-aware answers.
+1.	AI Neuro-Consultant:
+    *	Uses state-of-the-art LLMs for personalized customer support and recommendations.
+    *	Can answer customer queries, suggest menu items, and assist with navigating the store.
+2.	Dynamic Sushi Menu:
+    *	A regularly updated menu featuring seasonal novelties.
+    *	Includes detailed descriptions and high-quality images for every dish.
+3.	User-Friendly Design:
+    *	Responsive interface for smooth interaction on both desktop and mobile.
+    *	Intuitive navigation for exploring the menu, viewing promotions, and completing orders.
+4.	Efficient Order Processing:
+    *	Streamlined checkout experience.
+    *	Integration with payment gateways for secure transactions.
+5.	Custom Knowledge Base:
+    *	A proprietary knowledge base is used by the neuro-consultant to provide context-aware answers.
 
 ## Technologies Used
 
