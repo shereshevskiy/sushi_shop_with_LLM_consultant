@@ -8,6 +8,18 @@
 - приватный экспортируем в формате OpenSSH тоже к себе на компьютер
 - замена символических ссылок (на примере Python 3.12):
   sudo ln -s /usr/bin/python3.12 /usr/bin/python
+- полезно установить файловый менеджер **Midnight Commander**
+
+```
+sudo apt update
+sudo apt install -y mc
+```
+
+после установки для запуска в консоли:
+
+```
+mc
+```
 
 ## 2. В VS Code:
 
@@ -54,10 +66,9 @@ Host 5.35.88.248
 
   в переменную
 
-    `ALLOWED_HOSTS = ['your-server-ip', 'localhost', '127.0.0.1']`
+  `ALLOWED_HOSTS = ['your-server-ip', 'localhost', '127.0.0.1']`
 
-    добавляем ip сервера, где развернут проект, или доменное имя, если оно есть
-
+  добавляем ip сервера, где развернут проект, или доменное имя, если оно есть
 * в этом же файле `app/sushi_delivery_shop/settings.py`
   добавляем
 
