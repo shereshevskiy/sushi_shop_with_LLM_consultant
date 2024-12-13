@@ -71,7 +71,7 @@ pip-delete-this-directory.txt
 *.war
 
 # Файлы Jupyter Notebook с выходными данными (если не хотите их версионировать)
-*.ipynb
+# *.ipynb
 
 # Docker (если используется)
 .dockerignore
