@@ -1,6 +1,6 @@
 # SushiShop with LLM-Based Neuro-Consultant
 
-SushiShop is an innovative web application designed for a seamless sushi delivery experience. Powered by cutting-edge language models (LLM), it features a neuro-consultant to enhance user interaction and provide tailored recommendations.
+SushiShop is an innovative web application designed for a seamless sushi delivery experience. Powered by cutting-edge language models (**LLM**), it features a neuro-consultant to enhance user interaction and provide tailored recommendations.
 
 ## Key Features
 
@@ -41,6 +41,7 @@ SushiShop is an innovative web application designed for a seamless sushi deliver
 To deploy and run SushiShop on a remote server for development purposes (debug mode), follow these steps:
 
 1. Update ALLOWED_HOSTS in Django settings
+
 * Navigate to the settings file:
 
 app/sushi_delivery_shop/settings.py
@@ -52,6 +53,7 @@ ALLOWED_HOSTS = ['your-server-ip', 'localhost', '127.0.0.1']
 ```
 
 2. Configure API URLs in Django settings
+
 * In the same settings file, update the following variables:
 
 ```
@@ -62,6 +64,7 @@ CONSULTANT_API_URL = "http://your-server-ip:5000/api/get_answer"
 Replace your-server-ip with the external IP address of your server (or 127.0.0.1 for local testing).
 
 3. Export the Knowledge Base
+
 * Navigate to the project folder and run the following command to generate an updated knowledge base for the neuro-consultant:
 
 ```
@@ -70,6 +73,7 @@ python manage.py chunks_export
 ```
 
 4. Start the Django Web Application
+
 * In the same directory, launch the web application, ensuring it listens on all network interfaces:
 
 ```
@@ -77,6 +81,7 @@ python manage.py runserver 0.0.0.0:8000
 ```
 
 5. Start the Neuro-Consultant API
+
 * Open another terminal, navigate to the api folder, and start the neuro-consultant:
 
 ```
