@@ -1,6 +1,6 @@
 # SushiShop with LLM-Based Neuro-Consultant
 
-SushiShop is an innovative web application designed for a seamless sushi delivery experience. Powered by cutting-edge language models (**LLM**), it features a neuro-consultant to enhance user interaction and provide tailored recommendations.
+SushiShop is an innovative web application designed for a seamless sushi delivery experience. Powered by cutting-edge **language models** (**LLM**), it features a neuro-consultant to enhance user interaction and provide tailored recommendations.
 
 ## Key Features
 
